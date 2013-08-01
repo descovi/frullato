@@ -8,18 +8,20 @@ class Frullato
     end
   end
 
-  def explore_sub_folder _folder, _sub_folder
+  def explore_sub_folder _folder, _sub
     counter = 1
-    Dir.foreach("./#{_folder}/#{_sub_folder}") do |element|
-      p element
-      p counter
-      counter += 1
+    path = "#{_folder}/#{_sub}"
+    Dir.foreach(path) do |element|
+      path_to_file = "#{path}/#{element}"
+      if FolderUtils.good_for_renaming? element
+        end_file = path + "/#{counter}.jpeg"
+
+        File.rename(path_to_file, end_file)
+        counter += 1
+      end
     end
   end
 
-  def is_good_folder? str
-
-  end
 end
 
 class FolderUtils
